@@ -1,0 +1,157 @@
+import java.util.Scanner;
+
+abstract class Dunyalilar {
+    private int savunma;
+
+    public Dunyalilar(int savunma) {
+        this.savunma = savunma;
+    }
+
+    public int getSavunma() {
+        return savunma;
+    }
+
+    public void setSavunma(int savunma) {
+        this.savunma = savunma;
+    }
+
+    abstract int Guchesapla();
+
+}
+class Asker extends Dunyalilar{
+    private int silah;
+
+    public Asker(int savunma, int silah) {
+        super(savunma);
+        this.silah = silah;
+    }
+
+    public int getSilah() {
+        return silah;
+    }
+
+    public void setSilah(int silah) {
+        this.silah = silah;
+    }
+
+    @Override
+    int Guchesapla() {
+        return (silah*getSavunma());
+    }
+}
+class Ciftci extends Dunyalilar{
+    private int urunsayisi;
+    public Ciftci(int savunma,int urunsayisi){
+        super(savunma);
+        this.urunsayisi=urunsayisi;
+    }
+
+    public int getUrunsayisi() {
+        return urunsayisi;
+    }
+
+    public void setUrunsayisi(int urunsayisi) {
+        this.urunsayisi = urunsayisi;
+    }
+
+    @Override
+    int Guchesapla() {
+        return urunsayisi;
+    }
+}
+abstract class Uzayli{
+     private int savunma;
+
+    public Uzayli(int savunma) {
+        this.savunma = savunma;
+    }
+
+    public int getSavunma() {
+        return savunma;
+    }
+
+    public void setSavunma(int savunma) {
+        this.savunma = savunma;
+    }
+
+    abstract int Guchesapla();
+
+}
+class cyborg extends Uzayli{
+    private int lazer;
+    public cyborg(int savunma,int lazer){
+        super(savunma);
+        this.lazer=lazer;
+    }
+
+    public int getLazer() {
+        return lazer;
+    }
+
+    public void setLazer(int lazer) {
+        this.lazer = lazer;
+    }
+
+    @Override
+    int Guchesapla() {
+        return (lazer*getSavunma());
+    }
+}
+class madenci extends Uzayli{
+    private int maden;
+
+    public madenci(int savunma, int maden) {
+        super(savunma);
+        this.maden = maden;
+    }
+
+    public int getMaden() {
+        return maden;
+    }
+
+    public void setMaden(int maden) {
+        this.maden = maden;
+    }
+
+    @Override
+    int Guchesapla() {
+        return maden;
+    }
+}
+class Test{
+    public static void main(String[] args) {
+        Scanner tara = new Scanner(System.in);
+        int secim=0;
+        int dunyaguc=0;
+        int uzayliguc=0;
+        while (secim!=1){
+            for (int i=0;i<500;i++){
+                int rast=(int)(Math.random());
+                if (rast==0){
+                    Dunyalilar dunya=new Asker((int)(Math.random()*10),(int)(Math.random()*10));
+                    dunyaguc+=dunya.Guchesapla();
+                }
+                if (rast==1){
+                    Dunyalilar dunya2=new Ciftci((int)(Math.random()*10),(int)(Math.random()*10));
+                    dunyaguc+=dunya2.Guchesapla();
+                }
+                int rast2=(int)(Math.random());
+                if (rast2==0){
+                    Uzayli u1=new cyborg((int)(Math.random()*10),(int)(Math.random()*10));
+                    uzayliguc+=u1.Guchesapla();
+                }
+                if (rast2==1){
+                    Uzayli u2=new madenci((int)(Math.random()*10),(int)(Math.random()*10));
+                    uzayliguc+=u2.Guchesapla();
+                }
+
+            }
+            int puan=dunyaguc-uzayliguc;
+            System.out.println("dunyalıların puanı = " + dunyaguc);
+            System.out.println("uzaylıların puanı= "+uzayliguc);
+            System.out.println(puan);
+            System.out.println("çıkmak için 1e bas");
+            secim=tara.nextInt();
+        }
+    }
+}
