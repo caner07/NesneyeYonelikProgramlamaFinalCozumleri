@@ -1,0 +1,97 @@
+import java.util.Scanner;
+public class Zaman {
+	private int yil,ay;
+	public Zaman(int a,int y) {
+		if((y>=1 && y<=10) && (a>=1 && a<=12)) {
+			ay=a;yil=y;
+		}
+		else {
+			throw new IllegalArgumentException("Yanlis girdiniz!");
+		}
+		
+	}
+	public int GetYıl() {
+		return yil;
+	}
+	public int GetAy() {
+		return ay;
+	}
+}
+
+class Urun {
+	private String ad,tur;
+	private Zaman sk;
+	
+	public Urun(String a,String t,Zaman s) {
+		ad=a;tur=t;sk=s;
+	}
+	
+	public String GetName() {
+		return ad;
+	}
+	public String GetTur() {
+		return tur;
+	}
+	public Zaman GetSonKullanma() {
+		return sk;
+	}
+
+}
+
+class Test{
+	public static Urun[] sirala(Urun x []) {
+		int i,j;
+		Urun temp;
+		for(i = 0; i < 9; i++) {
+			for (j = i+1; j <10; j++) {
+				if( x[i].GetSonKullanma().GetYıl() > x[j].GetSonKullanma().GetYıl() ) {
+					temp = x[i];
+					x[i] = x[j];
+					x[j] = temp;
+				} 
+				else if( x[i].GetSonKullanma().GetYıl() == x[j].GetSonKullanma().GetYıl() ) {
+					if( x[i].GetSonKullanma().GetAy() > x[j].GetSonKullanma().GetAy() ) {
+						temp = x[i];
+						x[i] = x[j];
+						x[j] = temp;
+					} 
+				} 
+			}
+		}
+		return x;
+		}
+	public static String Yazdir(Urun x) {
+		return String.format("Ad: %s,Tur: %s, Skt -> Ay: %d/Yil: %d",x.GetName(),x.GetTur(),x.GetSonKullanma().GetAy(),x.GetSonKullanma().GetYıl());
+	}
+	
+	
+	public static void main(String args[]) {
+		Urun [] urunler = new Urun[10];
+		Scanner tara=new Scanner(System.in);
+		int ay,yil;
+		String tur,ad;
+		try {
+			for(int i=0;i<10;i++) {
+				System.out.printf("%d.Urunun Ay Bilgisi: \n",i+1);
+				ay=tara.nextInt();
+				System.out.printf("%d.Urunun Yil Bilgisi: \n",i+1);
+				yil=tara.nextInt();
+				Zaman urunzaman=new Zaman(ay,yil);
+				
+				System.out.printf("%d.Urunun adi: \n",i+1);
+				ad=tara.nextLine();
+				System.out.printf("%d.Urunun turu: \n",i+1);
+				tur=tara.nextLine();
+				Urun yeniurun=new Urun(ad,tur,urunzaman);
+				urunler[i]=yeniurun;
+			}
+		}
+		catch(IllegalArgumentException e){
+			System.out.println(e.getMessage());
+		}
+		urunler=sirala(urunler);
+		for(int i=0;i<10;i++) {
+			System.out.println( Yazdir(urunler[i]) );
+		}
+	}
+}
