@@ -1,0 +1,37 @@
+abstract class Hayvan{
+    void konusabilir(){
+        System.out.println("Bu hayvan ileri hareket eder.");
+    }
+    void hareketedebilir(){
+        System.out.println("Bu hayvan konuşur.");
+    }
+    
+}
+interface Ucan{
+    void ucma();
+}
+class Tilki extends Hayvan{
+    void konusabilir(){
+        System.out.println("Tilki konuşur.");
+    }
+    void hareketedebilir(){
+        System.out.println("Tilki hareket eder.");
+    }
+}
+class Kaz extends Hayvan implements Ucan{
+    
+    void konusabilir(){
+        System.out.println("Kaz konuşur");
+    }
+    void hareketedebilir(){
+        System.out.println("Kaz hareket eder.");
+    }
+    public void ucma() {
+        System.out.println("Kaz kanatlarıyla uçar.");
+    }
+}
+class ucak implements Ucan{
+    public void ucma(){
+        System.out.println("Uçak motorları ile uçar.");
+    }
+}
