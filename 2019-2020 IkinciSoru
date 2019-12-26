@@ -1,13 +1,11 @@
-  public static int[][] toplama (int[][]dizi){
+int[][] toplama (int[][]dizi){
         int toplam=0;
-        for (int i=0;i<dizi.length;i++){
+        for (int i=0;i<dizi.length;i+=2){
             for (int j=0;j<dizi[i].length;j++){
-                if (i%2==0){
                     if (dizi[i][j]%2 !=0){
                         toplam+=dizi[i][j];
                     }
                 }
             }
-        }
         return dizi;
     }
